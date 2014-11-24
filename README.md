@@ -25,6 +25,7 @@ The following option are supported:
 
 Option              | Description
 --------------------|------------
+browsers            | Specify browsers versions. Default: empty
 cascade           	| Creates nice visual cascade of prefixes. Default: true.
 sourceMap           | Enables source maps. Default: true.
 inlineSourceMap     | Enables inline source maps by data:uri to annotation comment. Default: false.
@@ -41,4 +42,14 @@ To include all CSS files for post processing
 includeFilter in autoprefixer := GlobFilter("*.css"),
 ```
 
-If you receive duplicate map errors when using incombination with LESS, turn sourceMapping off
+You also have to add autoprefixer to your package.json (in root):
+
+```json
+{
+  "dependencies": {
+    "autoprefixer": "~3.1.*"
+  }
+}
+```
+
+If you receive duplicate map errors when using incombination with LESS, turn sourceMapping off.
