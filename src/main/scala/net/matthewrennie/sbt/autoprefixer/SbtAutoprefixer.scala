@@ -12,9 +12,10 @@ object Import {
 
   object AutoprefixerKeys {
     val buildDir = SettingKey[File]("autoprefixer-build-dir", "Where autoprefixer will read from.")
+    val browsers = SettingKey[String]("autoprefixer-browsers", "Which browsers autoprefixer will support.")
     val cascade = SettingKey[Boolean]("autoprefixer-cascade", "Creates nice visual cascade of prefixes. The default is that cascade is enabled (true).")
     val inlineSourceMap = SettingKey[Boolean]("autoprefixer-inline-source-map", "Enables inline source maps by data:uri to annotation comment. The default is that inline source maps are dsiabled (false).")
-    val sourceMap = SettingKey[Boolean]("autoprefixer-source-map", "Enables source maps. The default is that source maps are enabled (true).")
+    val sourceMap = SettingKey[Boolean]("autoprefixer-map", "Enables source maps. The default is that source maps are enabled (true).")
   }
 
 }
@@ -39,6 +40,7 @@ object SbtAutoprefixer extends AutoPlugin {
     excludeFilter in autoprefixer := HiddenFileFilter,
     includeFilter in autoprefixer := GlobFilter("*.css"),
     resourceManaged in autoprefixer := webTarget.value / autoprefixer.key.label,
+    browsers := "",
     cascade := true,
     sourceMap := true,
     inlineSourceMap := false,
@@ -67,24 +69,27 @@ object SbtAutoprefixer extends AutoPlugin {
 
           val inputFileArgs = inputFiles.map(_.getPath)
 
-          val cascadeArgs = if (cascade.value) Seq("--cascade") else Nil
+          val browsersArg = if (browsers.value.length > 0) Seq("--browsers", browsers.value) else Nil
 
-          val sourceMapArgs = if (sourceMap.value) Seq("--map") else Nil
+          val cascadeArgs = if (cascade.value) Nil else Seq("--no-cascade")
+
+          val sourceMapArgs = if (sourceMap.value) Seq("--map") else Seq("--no-map")
 
           val inlineSourceMapArgs = if (inlineSourceMap.value) Seq("--inline-map") else Nil
 
-          val allArgs = Seq() ++ 
-            inputFileArgs ++
+          val allArgs = Seq() ++
+            browsersArg ++
             cascadeArgs ++
             sourceMapArgs ++
-            inlineSourceMapArgs
+            inlineSourceMapArgs ++
+            inputFileArgs
 
           SbtJsTask.executeJs(
             state.value,
             (engineType in autoprefixer).value,
             (command in autoprefixer).value,
             (nodeModuleDirectories in Assets).value.map(_.getPath),            
-            (nodeModuleDirectories in Assets).value.last / "autoprefixer" / "bin" / "autoprefixer",
+            (nodeModuleDirectories in Assets).value.last / "autoprefixer" / "autoprefixer",
             allArgs,
             (timeoutPerSource in autoprefixer).value * autoprefixerMappings.size
           )
