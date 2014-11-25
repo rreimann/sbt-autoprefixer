@@ -69,7 +69,7 @@ object SbtAutoprefixer extends AutoPlugin {
 
           val inputFileArgs = inputFiles.map(_.getPath)
 
-          val browsersArg = if (browsers.value.length > 0) Seq("--browsers", "\"" + browsers.value + "\"") else Nil
+          val browsersArg = if (browsers.value.length > 0) Seq("--browsers", browsers.value) else Nil
 
           val cascadeArgs = if (cascade.value) Nil else Seq("--no-cascade")
 
