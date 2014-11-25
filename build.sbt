@@ -13,7 +13,7 @@ resolvers ++= Seq(
   Resolver.url("sbt snapshot plugins", url("http://repo.scala-sbt.org/scalasbt/sbt-plugin-snapshots"))(Resolver.ivyStylePatterns),
   Resolver.sonatypeRepo("snapshots"),
   "Typesafe Snapshots Repository" at "http://repo.typesafe.com/typesafe/snapshots/",
-  "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
+  "Local Maven Repository" at ""+Path.userHome.absolutePath+"/.m2/repository"
 )
 
 addSbtPlugin("com.typesafe.sbt" %% "sbt-js-engine" % "1.0.0")
