@@ -14,7 +14,7 @@ object Import {
     val buildDir = SettingKey[File]("autoprefixer-build-dir", "Where autoprefixer will read from.")
     val browsers = SettingKey[String]("autoprefixer-browsers", "Which browsers autoprefixer will support.")
     val cascade = SettingKey[Boolean]("autoprefixer-cascade", "Creates nice visual cascade of prefixes. The default is that cascade is enabled (true).")
-    val inlineSourceMap = SettingKey[Boolean]("autoprefixer-inline-source-map", "Enables inline source maps by data:uri to annotation comment. The default is that inline source maps are dsiabled (false).")
+    val inlineSourceMap = SettingKey[Boolean]("autoprefixer-inline-source-map", "Enables inline source maps by data:uri to annotation comment. The default is that inline source maps are disabled (false).")
     val sourceMap = SettingKey[Boolean]("autoprefixer-map", "Enables source maps. The default is that source maps are enabled (true).")
   }
 
@@ -89,7 +89,7 @@ object SbtAutoprefixer extends AutoPlugin {
             (engineType in autoprefixer).value,
             (command in autoprefixer).value,
             (nodeModuleDirectories in Assets).value.map(_.getPath),            
-            (nodeModuleDirectories in Assets).value.last / "autoprefixer" / "autoprefixer",
+            (nodeModuleDirectories in Assets).value.last / "autoprefixer-cli" / "autoprefixer-cli",
             allArgs,
             (timeoutPerSource in autoprefixer).value * autoprefixerMappings.size
           )
