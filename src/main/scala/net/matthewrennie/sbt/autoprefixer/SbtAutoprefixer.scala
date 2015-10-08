@@ -12,6 +12,7 @@ object Import {
 
   object AutoprefixerKeys {
     val buildDir = SettingKey[File]("autoprefixer-build-dir", "Where autoprefixer will read from.")
+    val config = SettingKey[String]("autoprefixer-config", "Config file for autoprefixer.")
   }
 
 }
@@ -36,6 +37,7 @@ object SbtAutoprefixer extends AutoPlugin {
     excludeFilter in autoprefixer := HiddenFileFilter,
     includeFilter in autoprefixer := GlobFilter("*.css"),
     resourceManaged in autoprefixer := webTarget.value / autoprefixer.key.label,
+    config := "autoprefixer-config.json",
     autoprefixer := runAutoprefixer.dependsOn(WebKeys.nodeModules in Assets).value
   )
 
@@ -61,7 +63,10 @@ object SbtAutoprefixer extends AutoPlugin {
 
           val inputFileArgs = inputFiles.map(_.getPath)
 
+          val configArg = if (config.value.length > 0) Seq("--config", config.value) else Nil
+
           val allArgs = Seq() ++
+            configArg ++
             inputFileArgs
 
           SbtJsTask.executeJs(
