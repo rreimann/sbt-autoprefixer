@@ -6,7 +6,7 @@ name := "sbt-autoprefixer"
 
 version := "0.2.0-SNAPSHOT"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.10.6"
 
 resolvers ++= Seq(
   "Typesafe Releases Repository" at "http://repo.typesafe.com/typesafe/releases/",
