@@ -15,7 +15,7 @@ resolvers ++= Seq(
   "Typesafe Snapshots Repository" at "http://repo.typesafe.com/typesafe/snapshots/"
 )
 
-addSbtPlugin("com.typesafe.sbt" %% "sbt-js-engine" % "1.0.0")
+addSbtPlugin("com.typesafe.sbt" %% "sbt-js-engine" % "1.1.3")
 
 publishMavenStyle := false
 
