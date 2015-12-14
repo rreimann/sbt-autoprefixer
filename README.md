@@ -7,7 +7,7 @@ To use the latest version from Github, add the following to the `project/plugins
 
 ```scala
     lazy val root = project.in(file(".")).dependsOn(sbtAutoprefixer)
-    lazy val sbtAutoprefixer = uri("git://github.com/matthewrennie/sbt-autoprefixer")
+    lazy val sbtAutoprefixer = uri("git://github.com/mkurz/sbt-autoprefixer")
 ```
 
 Your project's build file also needs to enable sbt-web plugins. For example with build.sbt:
