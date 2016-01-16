@@ -42,7 +42,8 @@ To include all CSS files for post processing
 includeFilter in autoprefixer := GlobFilter("*.css"),
 ```
 
-You also have use npm to install required dependencies. Modify your package.json (in root):
+You also have to use npm in order to install required dependencies.
+Modify your package.json (in root):
 
 ```json
 {
