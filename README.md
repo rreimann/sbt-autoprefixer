@@ -42,14 +42,20 @@ To include all CSS files for post processing
 includeFilter in autoprefixer := GlobFilter("*.css"),
 ```
 
-You also have to add autoprefixer to your package.json (in root):
+You also have to use npm in order to install required dependencies.
+Modify your package.json (in root):
 
 ```json
 {
   "dependencies": {
-    "autoprefixer": "~3.1.*"
+	"autoprefixer": "^6.3.0",
+	"postcss-cli": "^2.4.0"
   }
 }
+```
+or invoke:
+```
+npm install postcss-cli@">=2.4.0" autoprefixer@">=6.3.0" --save
 ```
 
 If you receive duplicate map errors when using incombination with LESS, turn sourceMapping off.
