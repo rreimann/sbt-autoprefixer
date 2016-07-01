@@ -49,13 +49,13 @@ Modify your package.json (in root):
 {
   "dependencies": {
 	"autoprefixer": "^6.3.0",
-	"postcss-cli": "^2.4.0"
+	"postcss-cli": "^2.5.0"
   }
 }
 ```
 or invoke:
 ```
-npm install postcss-cli@">=2.4.0" autoprefixer@">=6.3.0" --save
+npm install postcss-cli@">=2.5.0" autoprefixer@">=6.3.0" --save
 ```
 
 If you receive duplicate map errors when using incombination with LESS, turn sourceMapping off.
