@@ -28,4 +28,4 @@ scriptedSettings
 
 scriptedBufferLog := false
 
-scriptedLaunchOpts <+= version apply { v => s"-Dproject.version=$v" }
+scriptedLaunchOpts += s"-Dproject.version=${version.value}"
